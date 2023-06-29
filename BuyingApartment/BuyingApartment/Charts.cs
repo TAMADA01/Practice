@@ -27,36 +27,24 @@ namespace BuyingApartment
                 chart1.Series.Add(GetSerias($"{i * delta}%"));
             }
             int month = 0;
-            while (IsNextYear())
+            while (month < 240)
             {
-                if (_data.Income <= _data.RentingCost)
-                {
-                    MessageBox.Show("Аренда больше дохода");
-                    break;
-                }
-                month++;
                 for (int i = 0; i < _data.Count; i++)
                 {
-                    chart1.Series[i].Points.Add(_strategies[i].Sum);
+                    chart1.Series[i].Points.AddXY(month, _strategies[i].Sum);
                     _strategies[i].Update();
-                    _strategies[i].GetMonth(month);
                 }
+                month++;
             }
-        }
 
-        private bool IsNextYear()
-        {
-            var isNextYear = false;
+            _strategies.Sort();
+            _strategies.Reverse();
 
+            label1.Text = $"Месяц {month}" + Environment.NewLine; 
             foreach (var strategy in _strategies)
             {
-                if (!strategy.IsStop)
-                {
-                    isNextYear = true;
-                }
+                label1.Text += strategy.ToString() + Environment.NewLine;
             }
-
-            return isNextYear;
         }
 
         private Series GetSerias(string name)

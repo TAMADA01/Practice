@@ -1,98 +1,64 @@
 ﻿using System;
-using System.Deployment.Application;
-using System.Xml.Linq;
 
 namespace BuyingApartment
 {
-    public class Strategy
+    public class Strategy : IComparable<Strategy>
     {
-        public bool IsBought = false;
-        public bool IsStop = false;
-        public bool IsFirst = true;
-        public bool IsDeposit = false;
-        public float Sum = 0;
+        private bool _isBought = false;
+        private float _sum = 0;
         private float _procent;
-        private float _credit;
+        private IStrategy _strategy;
 
+        public float Sum => _sum > 0 ? _sum : 0;
         private FormData _data => ProjectContext.Instance.FormData;
         public Strategy(float procent) 
         {
             _procent = procent / 100f;
             if (_procent == 0)
             {
-                IsDeposit = false;
-                IsBought = true;
-                _credit = _data.ApartmentCost ;
-                Sum = 0;
+                _sum = -_data.ApartmentCost;
+                _strategy = new Mortgage();
+                _isBought = true;
             }
             else
             {
-                IsDeposit = true;
+                _strategy = new Deposit();
+                _isBought = false;
             }
         }
 
         public void Update()
         {
-            if (Sum >= _data.ApartmentCost && !IsBought)
+            if (_sum >= _data.ApartmentCost && !_isBought)
             {
-                Sum -= _data.ApartmentCost;
-                IsBought = true;
-                IsStop = true;
+                _sum -= _data.ApartmentCost;
+                _isBought = true;
             }
 
-            if (IsDeposit)
+            if (_sum >= 0)
             {
-                CalculateDeposit();
+                _strategy = new Deposit();
             }
-            else
+
+            if (_sum >= _data.ApartmentCost * _procent && !_isBought)
             {
-                CalculateMortgage();
+                _strategy = new Mortgage();
+                _isBought = true;
+                _sum = -(_data.ApartmentCost - _sum);
             }
+
+            _strategy.Calculate(ref _sum);
+            _sum -= _isBought ? 0 : _data.RentingCost;
         }
 
-        private void CalculateMortgage()
+        public override string ToString()
         {
-            if (_credit <= 0)
-            {
-                IsDeposit = true;
-                IsStop = true;
-                return;
-            }
-
-            _credit += _credit * (_data.MortgageRate / 100f) / 12 - _data.Income;
+            return $"{_procent * 100}% - {Sum}";
         }
 
-        private void CalculateDeposit()
+        public int CompareTo(Strategy other)
         {
-            if (Sum >= _data.ApartmentCost * _procent && !IsBought)
-            {
-                IsDeposit = false;
-                IsBought = true;
-                _credit = _data.ApartmentCost - Sum;
-                Sum = 0;
-                return;
-            }
-            if (IsBought)
-            {
-                Sum += Sum * (_data.DepositRate / 100f) / 12 + _data.Income;
-            }
-            else
-            {
-                Sum += Sum * (_data.DepositRate / 100f) / 12 + _data.Income - _data.RentingCost;
-            }
-        }
-
-        public void GetMonth(int month)
-        {
-            if (month > 500) 
-            {
-                IsStop = true;
-            }
-            if (IsStop && IsFirst)
-            {
-                IsFirst = false;
-                Console.WriteLine($"{_procent*100}% - {month} месяц");
-            }
+            return (int)(Sum - other.Sum);
         }
     }
 }

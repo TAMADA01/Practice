@@ -10,3 +10,15 @@ C:\Users\alesh\source\repos\BuyingApartment\BuyingApartment\obj\Debug\BuyingApar
 C:\Users\alesh\source\repos\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.csproj.CoreCompileInputs.cache
 C:\Users\alesh\source\repos\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.exe
 C:\Users\alesh\source\repos\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.pdb
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\bin\Debug\BuyingApartment.exe.config
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\bin\Debug\BuyingApartment.exe
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\bin\Debug\BuyingApartment.pdb
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.csproj.AssemblyReference.cache
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.csproj.SuggestedBindingRedirects.cache
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.Charts.resources
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.Form1.resources
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.Properties.Resources.resources
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.csproj.GenerateResource.cache
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.csproj.CoreCompileInputs.cache
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.exe
+C:\Alex\Git\Practice\BuyingApartment\BuyingApartment\obj\Debug\BuyingApartment.pdb

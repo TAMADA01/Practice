@@ -14,23 +14,18 @@ namespace BuyingApartment
 
             ProjectContext.Initialize();
 
-            numericUpDown1.Value = 4000000;
+            numericUpDown1.Value = 6000000;
             numericUpDown2.Value = 20000;
             numericUpDown3.Value = 50000;
-            numericUpDown4.Value = 10;
-            numericUpDown5.Value = 4;
+            numericUpDown4.Value = 10.9m;
+            numericUpDown5.Value = 6.8m;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (_chartForm != null)
-            {
-                _chartForm.Close();
-                _chartForm = null;
-            }
+            _chartForm?.Close();
             _chartForm = new Charts();
             _chartForm.Show();
-
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
